@@ -1,0 +1,34 @@
+---
+title: How to serving Yolo models
+date: '2022-08-30'
+tags: ['Machine learning', 'Triton', 'Serving']
+draft: false
+summary: How to serving with Yolo models
+---
+
+Today, I will introduce some experiments with how to deploy Yolo model.
+
+Trước tiên chúng ta phải training model yolo trước. Ở trong bài viết này tôi sẽ sử dụng yolo v8 để thử nghiệm.
+
+Format model tôi sẽ dùng onnx trước và cố gắng để tối ưu hoá các traffic, trong các series tới chúng ta sẽ xem xét 
+tới việc sử dụng tensorrt để tối ưu hoá.
+
+
+### Prepare
+
+
+Install ultralytics
+
+```bash
+pip install ultralytics
+```
+Export model file onnx
+
+```python
+from ultralytics import YOLO
+
+model = YOLO("yolov8m.pt")
+model.export(format="onnx", imgsz=[480,640])
+
+```
+
